@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year Photo Story</title>
+    <title>Happy New Year</title>
     <style>
         body {
             margin: 0;
@@ -46,20 +46,13 @@
             transform: scale(1.05);
         }
         .fireworks {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 1000;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #111;
-            color: white;
-            font-size: 1rem;
         }
         @keyframes fireworks {
             0% {
@@ -79,13 +72,37 @@
             background: radial-gradient(circle, yellow, transparent);
             animation: fireworks 2s ease-out infinite;
         }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #111;
+            color: white;
+            font-size: 1rem;
+        }
+        #toggle-music {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Happy New Year 2024</h1>
-        <p>A journey through memories to welcome a new beginning</p>
+        <p>Celebrate with Sparkles and Music</p>
     </header>
+
+    <audio id="background-music" autoplay loop>
+        <source src="Dramamine.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <button id="toggle-music" style="padding: 10px 20px; font-size: 16px;">Pause Music</button>
+    </div>
 
     <div class="fireworks"></div>
 
@@ -100,37 +117,16 @@
     <section>
         <img src="3.jpg" alt="Photo 3">
     </section>
-
-    <section>
-        <img src="4.jpg" alt="Photo 4">
-    </section>
-
-    <section>
-        <img src="5.jpg" alt="Photo 5">
-    </section>
-
-    <section>
-        <img src="6.jpg" alt="Photo 6">
-    </section>
-
-    <section>
-        <img src="7.jpg" alt="Photo 7">
-    </section>
-
-    <section>
-        <img src="8.jpg" alt="Photo 8">
-    </section>
-
-    <section>
-        <img src="9.jpg" alt="Photo 9">
-    </section>
-
-    <section>
-        <img src="10.jpg" alt="Photo 10">
-    </section>
+    <section><img src="4.jpg" alt="Photo 4"></section>
+    <section><img src="5.jpg" alt="Photo 5"></section>
+    <section><img src="6.jpg" alt="Photo 6"></section>
+    <section><img src="7.jpg" alt="Photo 7"></section>
+    <section><img src="8.jpg" alt="Photo 8"></section>
+    <section><img src="9.jpg" alt="Photo 9"></section>
+    <section><img src="10.jpg" alt="Photo 10"></section>
 
     <footer>
-        <p>Wishing you a year full of happiness, success, and love. Happy New Year 2024!</p>
+        <p>Wishing you a wonderful year ahead!</p>
     </footer>
 
     <script>
@@ -138,36 +134,36 @@
             const fireworksContainer = document.querySelector('.fireworks');
             const firework = document.createElement('div');
             firework.classList.add('firework');
-    
-            // Ukuran kembang api acak
-            const size = Math.random() * 10 + 5; 
+            const size = Math.random() * 10 + 5;
             const duration = Math.random() * 2 + 1;
-    
-            // Pilih apakah kembang api muncul di kiri atau kanan
             const side = Math.random() > 0.5 ? 'left' : 'right';
-            const left = side === 'left' 
-                ? Math.random() * 10 + '%' // Rentang 0%–10%
-                : Math.random() * 10 + 90 + '%'; // Rentang 90%–100%
-    
-            // Posisi vertikal acak (0%-100%)
+            const left = side === 'left'
+                ? Math.random() * 10 + '%'
+                : Math.random() * 10 + 90 + '%';
             const top = Math.random() * 100 + '%';
-    
             firework.style.width = `${size}px`;
             firework.style.height = `${size}px`;
             firework.style.left = left;
             firework.style.top = top;
             firework.style.animationDuration = `${duration}s`;
             firework.style.background = 'radial-gradient(circle, yellow, transparent)';
-    
             fireworksContainer.appendChild(firework);
-    
-            // Hapus elemen setelah animasi selesai
             setTimeout(() => firework.remove(), duration * 1000);
         }
-    
-        // Interval untuk membuat kembang api
         setInterval(createFirework, 300);
-    </script>
 
+        const audio = document.getElementById('background-music');
+        const toggleButton = document.getElementById('toggle-music');
+
+        toggleButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                toggleButton.textContent = 'Pause Music';
+            } else {
+                audio.pause();
+                toggleButton.textContent = 'Play Music';
+            }
+        });
+    </script>
 </body>
 </html>
