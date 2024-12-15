@@ -76,7 +76,7 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: radial-gradient(circle, white, transparent);
+            background: radial-gradient(circle, yellow, transparent);
             animation: fireworks 2s ease-out infinite;
         }
     </style>
@@ -135,19 +135,22 @@
 
     <script>
         function createFirework() {
+            console.log('Firework is created'); // Debug log
             const fireworksContainer = document.querySelector('.fireworks');
             const firework = document.createElement('div');
             firework.classList.add('firework');
-            const size = Math.random() * 5 + 5;
+            const size = Math.random() * 20 + 10; // Perbesar ukuran
             const left = Math.random() * 100;
             const duration = Math.random() * 2 + 1;
             firework.style.width = `${size}px`;
             firework.style.height = `${size}px`;
             firework.style.left = `${left}%`;
             firework.style.animationDuration = `${duration}s`;
+            firework.style.background = 'radial-gradient(circle, yellow, transparent)'; // Warna mencolok
             fireworksContainer.appendChild(firework);
             setTimeout(() => firework.remove(), duration * 1000);
         }
+
 
         setInterval(createFirework, 300);
     </script>
